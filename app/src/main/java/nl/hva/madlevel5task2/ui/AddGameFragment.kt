@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import nl.hva.madlevel5task2.R
 import nl.hva.madlevel5task2.databinding.FragmentAddGameBinding
 
 /**
