@@ -58,7 +58,13 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun isInputValid(title: String, platform: String, day: String, month: String, year: String): Boolean {
+    private fun isInputValid(
+        title: String,
+        platform: String,
+        day: String,
+        month: String,
+        year: String
+    ): Boolean {
         return when {
             title.isBlank() -> {
                 error.value = "Title must not be empty"
@@ -68,8 +74,13 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
                 error.value = "Platform must not be empty"
                 false
             }
-            day.isBlank() -> {
-                error.value = "Date must not be empty"
+            day.isBlank()
+                    || day.length > 2
+                    || month.isBlank()
+                    || month.length > 2
+                    || year.isBlank()
+                    || year.length > 2 -> {
+                error.value = "Invalid date input"
                 false
             }
             else -> true

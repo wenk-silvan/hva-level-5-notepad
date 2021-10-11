@@ -38,7 +38,6 @@ class AddGameFragment : Fragment() {
         observeMessages()
         binding.fabSaveGame.setOnClickListener {
             saveGame()
-            findNavController().popBackStack()
         }
     }
 
@@ -62,8 +61,8 @@ class AddGameFragment : Fragment() {
             binding.tilGame.editText?.text.toString(),
             binding.tilPlatform.editText?.text.toString(),
             binding.tilDay.editText?.text.toString(),
-            binding.tilDay.editText?.text.toString(),
-            binding.tilDay.editText?.text.toString()
+            binding.tilMonth.editText?.text.toString(),
+            binding.tilYear.editText?.text.toString()
         )
     }
 }

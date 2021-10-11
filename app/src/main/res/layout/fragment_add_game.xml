@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                app:boxBackgroundColor="@color/white"
                 android:hint="@string/tilGame">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -40,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                app:boxBackgroundColor="@color/white"
                 android:hint="@string/tilPlatform">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -62,6 +64,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:boxBackgroundColor="@color/white"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="2"
                     android:hint="@string/tilDay">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -80,6 +85,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:boxBackgroundColor="@color/white"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="2"
                     android:hint="@string/tilMonth">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -96,6 +104,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:boxBackgroundColor="@color/white"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="4"
                     android:hint="@string/tilYear">
 
                     <com.google.android.material.textfield.TextInputEditText
