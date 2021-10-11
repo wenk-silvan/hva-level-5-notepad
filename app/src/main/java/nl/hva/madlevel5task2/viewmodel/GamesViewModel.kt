@@ -23,11 +23,14 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertGame(title: String, platform: String, day: String, month: String, year: String) {
         if (isInputValid(title, platform, day, month, year)) {
-            val date = Date(
+
+            val c = Calendar.getInstance()
+            c.set(
                 Integer.parseInt(year),
-                Integer.parseInt(month),
-                Integer.parseInt(day))
-            val game = Game(title, platform, date)
+                Integer.parseInt(month) - 1,
+                Integer.parseInt(day), 0, 0
+            )
+            val game = Game(title, platform, c.time)
             mainScope.launch {
                 withContext(Dispatchers.IO) {
                     repository.insertGame(game)
