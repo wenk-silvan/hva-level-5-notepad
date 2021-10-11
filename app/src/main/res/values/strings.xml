@@ -8,4 +8,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="fabAddGame">navigate to AddGameFragment</string>
+    <string name="fabSaveGame">add game to list and navigate to GamesFragment</string>
+    <string name="tilGame">Title</string>
+    <string name="tilPlatform">Platform</string>
+    <string name="tilDay">Day</string>
+    <string name="tilMonth">Month</string>
+    <string name="tilYear">Year</string>
 </resources>

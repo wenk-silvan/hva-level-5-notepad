@@ -1,4 +1,4 @@
-package nl.hva.madlevel5task2.dao
+package nl.hva.madlevel5task2.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

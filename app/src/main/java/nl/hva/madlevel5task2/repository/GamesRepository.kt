@@ -2,7 +2,7 @@ package nl.hva.madlevel5task2.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import nl.hva.madlevel5task2.dao.GameDao
+import nl.hva.madlevel5task2.db.GameDao
 import nl.hva.madlevel5task2.db.GamesRoomDatabase
 import nl.hva.madlevel5task2.model.Game
 

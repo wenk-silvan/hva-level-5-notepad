@@ -6,7 +6,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import nl.hva.madlevel5task2.dao.GameDao
 import nl.hva.madlevel5task2.model.Converters
 import nl.hva.madlevel5task2.model.Game
 import java.util.*

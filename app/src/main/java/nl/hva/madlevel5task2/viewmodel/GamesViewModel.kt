@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import nl.hva.madlevel5task2.model.Game
 import nl.hva.madlevel5task2.repository.GamesRepository
+import java.time.LocalDate
+import java.util.*
 
 class GamesViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = GamesRepository(application.applicationContext)
@@ -19,8 +21,16 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
     val error = MutableLiveData<String>()
     val success = MutableLiveData<Boolean>()
 
-    fun insertGame(game: Game) {
-        if (isGameValid(game)) {
+    fun insertGame(title: String, platform: String, day: String, month: String, year: String) {
+        if (isInputValid(title, platform, day, month, year)) {
+            val date = Date(
+                LocalDate.of(
+                    Integer.parseInt(day),
+                    Integer.parseInt(month),
+                    Integer.parseInt(year)
+                ).toEpochDay()
+            )
+            val game = Game(title, platform, date)
             mainScope.launch {
                 withContext(Dispatchers.IO) {
                     repository.insertGame(game)
@@ -48,18 +58,17 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun isGameValid(game: Game): Boolean {
+    private fun isInputValid(title: String, platform: String, day: String, month: String, year: String): Boolean {
         return when {
-            game.title.isBlank() -> {
+            title.isBlank() -> {
                 error.value = "Title must not be empty"
                 false
             }
-            game.platform.isBlank() -> {
+            platform.isBlank() -> {
                 error.value = "Platform must not be empty"
                 false
             }
-            //TODO: Assert condition
-            game.release == null -> {
+            day.isBlank() -> {
                 error.value = "Date must not be empty"
                 false
             }
