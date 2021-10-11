@@ -1,16 +1,14 @@
 package nl.hva.madlevel5task2.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import nl.hva.madlevel5task2.R
 import nl.hva.madlevel5task2.adapter.GamesAdapter
 import nl.hva.madlevel5task2.databinding.FragmentGamesBinding
@@ -37,6 +35,7 @@ class GamesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         initRecyclerView()
         observeAddNoteResult()
 
@@ -60,12 +59,22 @@ class GamesFragment : Fragment() {
                 return false
             }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                viewModel.deleteGame(games[position])
-            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) =
+                deleteOrUndo(viewHolder.adapterPosition)
         }
         return ItemTouchHelper(callback)
+    }
+
+    private fun deleteOrUndo(position: Int) {
+        val gameToDelete = games[position]
+        viewModel.deleteGame(gameToDelete)
+        gamesAdapter.notifyItemRemoved(position)
+        Snackbar.make(
+            binding.rvGames, getString(R.string.snackbarOnDeleteGame), Snackbar.LENGTH_LONG
+        ).setAction("Undo") {
+            viewModel.insertGame(gameToDelete)
+            gamesAdapter.notifyItemInserted(position)
+        }.show()
     }
 
     private fun initRecyclerView() {
@@ -85,4 +94,30 @@ class GamesFragment : Fragment() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_actions, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_action_delete -> {
+                val games = viewModel.games.value!!
+                viewModel.deleteAllGames()
+                gamesAdapter.notifyDataSetChanged()
+                Snackbar.make(
+                    binding.rvGames, getString(R.string.snackbarOnDeleteGames), Snackbar.LENGTH_LONG
+                ).setAction("Undo") {
+                    games.forEach {
+                        viewModel.insertGame(it)
+                    }
+                    gamesAdapter.notifyDataSetChanged()
+                }.show()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
 }

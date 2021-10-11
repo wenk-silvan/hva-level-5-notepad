@@ -24,12 +24,9 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
     fun insertGame(title: String, platform: String, day: String, month: String, year: String) {
         if (isInputValid(title, platform, day, month, year)) {
             val date = Date(
-                LocalDate.of(
-                    Integer.parseInt(day),
-                    Integer.parseInt(month),
-                    Integer.parseInt(year)
-                ).toEpochDay()
-            )
+                Integer.parseInt(year),
+                Integer.parseInt(month),
+                Integer.parseInt(day))
             val game = Game(title, platform, date)
             mainScope.launch {
                 withContext(Dispatchers.IO) {
@@ -37,6 +34,15 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
                 }
                 success.value = true
             }
+        }
+    }
+
+    fun insertGame(game: Game) {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.insertGame(game)
+            }
+            success.value = true
         }
     }
 
@@ -74,12 +80,7 @@ class GamesViewModel(application: Application) : AndroidViewModel(application) {
                 error.value = "Platform must not be empty"
                 false
             }
-            day.isBlank()
-                    || day.length > 2
-                    || month.isBlank()
-                    || month.length > 2
-                    || year.isBlank()
-                    || year.length > 2 -> {
+            day.length != 2 || month.length != 2 || year.length != 4 -> {
                 error.value = "Invalid date input"
                 false
             }

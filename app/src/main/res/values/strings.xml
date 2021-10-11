@@ -15,4 +15,7 @@
     <string name="tilDay">Day</string>
     <string name="tilMonth">Month</string>
     <string name="tilYear">Year</string>
+    <string name="snackbarOnDeleteGame">Successfully deleted game</string>
+    <string name="snackbarOnDeleteGames">Successfully deleted all games</string>
+    <string name="menuDeleteTitle">Delete All</string>
 </resources>

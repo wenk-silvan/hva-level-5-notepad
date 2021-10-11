@@ -9,8 +9,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import nl.hva.madlevel5task2.R
 import nl.hva.madlevel5task2.databinding.ActivityMainBinding
+import nl.hva.madlevel5task2.viewmodel.GamesViewModel
 
 class MainActivity : AppCompatActivity() {
 
